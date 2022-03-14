@@ -80,7 +80,7 @@ export const particleCatBackground: any = {
   autoPlay: true,
   background: {
     color: {
-      value: "#043564",
+      value: "#000000",
     },
     image:
       "url('http://vincentgarreau.com/particles.js/assets/img/kbLd9vb_new.gif')",
