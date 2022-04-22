@@ -1,6 +1,6 @@
 import React from "react";
-import BackgroundPresenter from "./BackgroundPT";
+import BackgroundPT from "./BackgroundPT";
 
-const BackgroundContainer = () => <BackgroundPresenter />;
+const BackgroundCT = () => <BackgroundPT />;
 
-export default BackgroundContainer;
+export default BackgroundCT;

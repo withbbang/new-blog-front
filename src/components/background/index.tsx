@@ -1,2 +1,2 @@
-import BackgroundContainer from "./BackgroundCT";
-export default BackgroundContainer;
+import BackgroundCT from "./BackgroundCT";
+export default BackgroundCT;
