@@ -3,6 +3,7 @@ import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import Background from "components/background";
 import Index from "screens/index";
 import Three from "screens/three";
+import Tree from "screens/tree";
 
 const App = () => {
   return (
@@ -12,6 +13,7 @@ const App = () => {
         <Switch>
           <Route exact path="/" component={Index} />
           <Route exact path="/three" component={Three} />
+          <Route exact path="/tree" component={Tree} />
           <Route
             path="*"
             component={(props: any) => (
