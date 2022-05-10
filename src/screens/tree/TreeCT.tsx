@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Root from "utils/Root";
+import Root from "utils/tree/Root";
 import TreePT from "./TreePT";
 
 const TreeCT = () => {

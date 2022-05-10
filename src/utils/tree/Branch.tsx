@@ -18,12 +18,13 @@ class Branch {
     endX: number | undefined,
     endY: number | undefined,
     lineWidth: number,
+    color: string,
   ) {
     this.startX = startX;
     this.startY = startY;
     this.endX = endX;
     this.endY = endY;
-    this.color = "#000000";
+    this.color = color;
     this.lineWidth = lineWidth;
     this.frame = 10; // 가지를 100등분으로 나누기 위한 변수 frame 선언
     this.cntFrame = 0; // 현재 frame

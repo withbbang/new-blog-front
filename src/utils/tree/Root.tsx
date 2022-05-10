@@ -10,6 +10,7 @@ class Root {
   constructor() {
     // 캔버스 생성 후 랜더링
     this.canvas = document.createElement("canvas");
+    this.canvas.style.background = "#000000";
     const treeTag = document.getElementById("tree");
     treeTag && treeTag.appendChild(this.canvas);
 
@@ -23,7 +24,6 @@ class Root {
     this.resize();
 
     // 화면 가운데에 나무 생성
-    const half = this.stageWidth;
     new Tree(
       this.ctx,
       this.stageWidth && this.stageWidth / 2,

@@ -8,6 +8,8 @@ class Tree {
   depth: number;
   cntDepth: number;
   animation: number | null;
+  customColors: string[];
+  customColorIdx: number;
 
   constructor(
     ctx: CanvasRenderingContext2D | null,
@@ -19,9 +21,18 @@ class Tree {
     this.posY = posY;
     this.branches = []; // 가지들을 담을 공간
     this.depth = 11;
+    this.customColors = [
+      "rgb(255, 0, 0)",
+      "rgb(255, 255, 0)",
+      "rgb(255, 0, 255)",
+      "rgb(0, 255, 0)",
+      "rgb(0, 255, 255)",
+      "rgb(0, 0, 255)",
+    ];
 
     this.cntDepth = 0; // depth별로 그리기 위해 현재 depth 변수 선언
     this.animation = null; // 현재 동작하는 애니메이션
+    this.customColorIdx = this.random(0, 5);
 
     this.init();
   }
@@ -35,7 +46,7 @@ class Tree {
     // 시작 각도는 -90도를 주어 아래에서 위로 나무 기둥이 자라도록한다.
     // 시작 depth는 0으로 준다.
     this.createBranch(this.posX, this.posY, -90, 0);
-    this.draw(this.ctx);
+    this.draw();
   }
 
   createBranch(
@@ -55,16 +66,32 @@ class Tree {
     const endY =
       startY && startY + this.sin(angle) * len * (this.depth - depth);
 
+    let color = "";
+
+    if (depth < 2) {
+      color = "rgb(255, 255, 255)";
+    } else if (depth < 4) {
+      color = this.customColors[this.customColorIdx].replaceAll("0", "239");
+    } else if (depth < 6) {
+      color = this.customColors[this.customColorIdx].replaceAll("0", "217");
+    } else if (depth < 8) {
+      color = this.customColors[this.customColorIdx].replaceAll("0", "160");
+    } else if (depth < 10) {
+      color = this.customColors[this.customColorIdx].replaceAll("0", "64");
+    } else {
+      color = this.customColors[this.customColorIdx].replaceAll("0", "32");
+    }
+
     // depth에 해당하는 위치의 배열에 가지를 추가
     this.branches[depth].push(
-      new Branch(startX, startY, endX, endY, this.depth - depth),
+      new Branch(startX, startY, endX, endY, this.depth - depth, color),
     );
 
     this.createBranch(endX, endY, angle - this.random(15, 23), depth + 1);
     this.createBranch(endX, endY, angle + this.random(15, 23), depth + 1);
   }
 
-  draw(ctx: CanvasRenderingContext2D | null) {
+  draw() {
     // 다 그렸으면 requestAnimationFrame을 중단해 메모리 누수가 없게 함.
     if (this.cntDepth === this.depth) {
       this.animation && cancelAnimationFrame(this.animation);
