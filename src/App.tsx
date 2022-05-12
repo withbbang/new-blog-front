@@ -4,6 +4,7 @@ import Background from "components/background";
 import Index from "screens/index";
 import Three from "screens/three";
 import Tree from "screens/tree";
+import Rain from "screens/rain";
 
 const App = () => {
   return (
@@ -14,6 +15,7 @@ const App = () => {
           <Route exact path="/" component={Index} />
           <Route exact path="/three" component={Three} />
           <Route exact path="/tree" component={Tree} />
+          <Route exact path="/rain" component={Rain} />
           <Route
             path="*"
             component={(props: any) => (
