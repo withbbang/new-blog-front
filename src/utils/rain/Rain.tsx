@@ -10,7 +10,6 @@ class Rain {
   rainHeight: number;
   animation: number | undefined;
   posY: number;
-  test: undefined;
 
   constructor(
     ctx: CanvasRenderingContext2D | null,
