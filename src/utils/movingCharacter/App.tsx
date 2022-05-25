@@ -9,7 +9,7 @@ class App {
 
   constructor() {
     this.canvas = document.createElement("canvas");
-    this.canvas.style.background = "#000000";
+    // this.canvas.style.background = "#000000";
     const movingCharacter = document.getElementById("movingCharacter");
     movingCharacter && movingCharacter.appendChild(this.canvas);
 
