@@ -25,7 +25,7 @@ class App {
     new Voyeurize(this.ctx, imgSrc, this.stageWidth, this.stageWidth);
   }
 
-  resize() {
+  resize(): void {
     this.stageWidth = document.body.clientWidth;
     this.stageHeight = document.body.clientHeight;
 
@@ -38,7 +38,7 @@ class App {
     }
   }
 
-  isExist(name: string | null) {
+  isExist(name: string | null): string {
     if (name)
       switch (name.trim()) {
         case "이종성":

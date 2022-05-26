@@ -28,6 +28,9 @@ class Voyeurize {
     document.addEventListener("mousemove", this.mousemove);
     document.addEventListener("mousedown", this.mousedown);
     document.addEventListener("mouseup", this.mouseup);
+    document.addEventListener("touchmove", this.touchmove);
+    document.addEventListener("touchstart", this.touchstart);
+    document.addEventListener("touchend", this.touchend);
 
     this.fill();
     imgSrc && alert("꾸욱 누르고 있어용~");
@@ -43,7 +46,7 @@ class Voyeurize {
       this.ctx.clearRect(0, 0, this.stageWidth, this.stageHeight);
   };
 
-  voyeurize = () => {
+  voyeurize: () => void = () => {
     if (
       this.ctx &&
       this.mousePosX &&
@@ -67,7 +70,7 @@ class Voyeurize {
     }
   };
 
-  voyeurize_ = () => {
+  voyeurize_: () => void = () => {
     if (
       this.ctx &&
       this.mousePosX &&
@@ -92,22 +95,21 @@ class Voyeurize {
     }
   };
 
-  update = () => {
+  update: () => void = () => {
     this.clear();
     this.voyeurize();
     requestAnimationFrame(this.update);
   };
 
-  fill = () => {
+  fill: () => void = () => {
     if (this.ctx && this.stageWidth && this.stageHeight) {
       this.ctx.fillStyle = "#000000";
       this.ctx.fillRect(0, 0, this.stageWidth, this.stageHeight);
     }
   };
 
-  fadeIn = () => {
+  fadeIn: () => void = () => {
     this.count -= 1;
-    console.log("count: ", this.count);
 
     if (this.count < 1 && this.animation) {
       cancelAnimationFrame(this.animation);
@@ -119,22 +121,40 @@ class Voyeurize {
     this.animation = requestAnimationFrame(this.fadeIn);
   };
 
-  mousedown = (e: any) => {
+  mousedown: () => void = () => {
     this.fadeIn();
   };
 
-  mouseup = (e: any) => {
+  mouseup: () => void = () => {
     this.animation && cancelAnimationFrame(this.animation);
     this.count = this.initCount;
     this.fill();
   };
 
-  mousemove = (e: any) => {
+  mousemove: (e: any) => void = (e: any) => {
     this.mousePosX = e.clientX;
     this.mousePosY = e.clientY;
   };
 
-  random = () => {
+  touchstart: () => void = () => {
+    console.log("is touch start?");
+    this.fadeIn();
+  };
+
+  touchend: () => void = () => {
+    console.log("is touch end?");
+    this.animation && cancelAnimationFrame(this.animation);
+    this.count = this.initCount;
+    this.fill();
+  };
+
+  touchmove: (e: any) => void = (e: any) => {
+    console.log("e.clientX: ", e.changedTouches[0].clientX);
+    this.mousePosX = e.changedTouches[0].clientX;
+    this.mousePosY = e.changedTouches[0].clientY;
+  };
+
+  random: () => number = () => {
     return Math.floor(Math.random() * (72000 - 54000) + 54000);
   };
 }
