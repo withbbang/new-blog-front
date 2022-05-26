@@ -1,3 +1,5 @@
+import { Player } from "types";
+
 class Character {
   ctx: CanvasRenderingContext2D | null;
   character: HTMLImageElement;
@@ -101,26 +103,18 @@ class Character {
       e.key === "ArrowRight" ||
       e.key === "Right" ||
       e.key === "ArrowLeft" ||
-      e.key === "Left" ||
+      e.key === "Left"
+    ) {
+      this.player.dx = 0;
+    } else if (
       e.key === "ArrowUp" ||
       e.key === "Up" ||
       e.key === "ArrowDown" ||
       e.key === "Down"
     ) {
-      this.player.dx = 0;
       this.player.dy = 0;
     }
   };
 }
-
-type Player = {
-  w: number;
-  h: number;
-  x: number;
-  y: number;
-  speed: number;
-  dx: number;
-  dy: number;
-};
 
 export default Character;
