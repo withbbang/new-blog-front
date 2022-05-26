@@ -137,12 +137,10 @@ class Voyeurize {
   };
 
   touchstart: () => void = () => {
-    console.log("is touch start?");
     this.fadeIn();
   };
 
   touchend: () => void = () => {
-    console.log("is touch end?");
     this.animation && cancelAnimationFrame(this.animation);
     this.count = this.initCount;
     this.fill();
