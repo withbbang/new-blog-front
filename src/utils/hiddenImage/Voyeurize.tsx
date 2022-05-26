@@ -5,6 +5,7 @@ class Voyeurize {
   mousePosX: number | undefined;
   mousePosY: number | undefined;
   radius: number;
+  count: number;
 
   constructor(
     ctx: CanvasRenderingContext2D | null,
@@ -17,10 +18,13 @@ class Voyeurize {
     this.stageHeight = stageHeight;
     this.mousePosX = 1;
     this.mousePosY = 1;
+    this.count = this.random();
 
     document.addEventListener("mousemove", this.mousemove);
     document.addEventListener("mousedown", this.mousedown);
     document.addEventListener("mouseup", this.mouseup);
+
+    // alert(`${this.count}초 동안 누르고 있어용~`);
 
     this.update();
   }
@@ -62,13 +66,23 @@ class Voyeurize {
     requestAnimationFrame(this.update);
   };
 
-  mousedown = (e: any) => {};
+  mousedown = (e: any) => {
+    console.log("mousedown visited?");
+    //TODO: FadeIn(), update 함수 주석
+  };
 
-  mouseup = (e: any) => {};
+  mouseup = (e: any) => {
+    console.log("mouseup visited?");
+    //TODO: FadeOut(), update 함수 주석
+  };
 
   mousemove = (e: any) => {
     this.mousePosX = e.clientX;
     this.mousePosY = e.clientY;
+  };
+
+  random = () => {
+    return Math.floor(Math.random() * (120 - 90) + 90);
   };
 }
 
