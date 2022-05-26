@@ -149,7 +149,6 @@ class Voyeurize {
   };
 
   touchmove: (e: any) => void = (e: any) => {
-    console.log("e.clientX: ", e.changedTouches[0].clientX);
     this.mousePosX = e.changedTouches[0].clientX;
     this.mousePosY = e.changedTouches[0].clientY;
   };
