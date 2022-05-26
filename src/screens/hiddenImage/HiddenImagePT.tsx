@@ -1,15 +1,15 @@
 import React from "react";
 
-const HiddenImagePT = () => (
+const HiddenImagePT = (props: any) => (
   <div
     id="hiddenImage"
     style={{
       width: "100%",
       height: "100%",
-      backgroundImage: "url('/images/breadCharacter.png')",
+      backgroundImage: `url(${props.imgSrc})`,
+      backgroundSize: "contain",
       backgroundPosition: "center",
       backgroundRepeat: "no-repeat",
-      backgroundSize: "cover",
     }}
   ></div>
 );
