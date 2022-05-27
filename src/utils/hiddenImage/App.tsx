@@ -1,4 +1,5 @@
 import Voyeurize from "./Voyeurize";
+import hssong from "assets/images/hssong.jpg";
 import jslee from "assets/images/jslee.jpg";
 import skpark from "assets/images/skpark.jpg";
 import smyoo from "assets/images/smyoo.jpg";
@@ -57,6 +58,8 @@ class App {
   isExist(name: string | null): string {
     if (name)
       switch (name.trim()) {
+        case "송홍섭":
+          return hssong;
         case "이종성":
           return jslee;
         case "박상국":
