@@ -28,7 +28,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
@@ -51,6 +53,9 @@
   "devDependencies": {
     "@types/react-router-dom": "^5.3.3",
     "@types/redux-actions": "^2.6.2",
-    "@types/redux-logger": "^3.0.9"
-  }
+    "@types/redux-logger": "^3.0.9",
+    "@types/three": "^0.140.0",
+    "gh-pages": "^4.0.0"
+  },
+  "homepage": "http://withbbang.github.io/new-blog-front/"
 }
