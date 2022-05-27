@@ -4,7 +4,7 @@ import App from "utils/hiddenImage/App";
 import img from "assets/images/breadCharacter.png";
 
 const HiddenImageCT = () => {
-  const [imgSrc, setImgSrc] = useState(img);
+  const [imgSrc, setImgSrc] = useState<string>(img);
 
   useEffect(() => {
     new App(imgSrc, setImgSrc);
