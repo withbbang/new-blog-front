@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import ThreePT from "./ThreePT";
 import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
+import star from "assets/images/star.svg"
 
 const ThreeCT = () => {
   useEffect(() => {
@@ -158,10 +159,10 @@ const ThreeCT = () => {
       ctx.fill();
     }
 
-    const star = loader.load("/images/star.svg");
+    const _star = loader.load(star);
     const particlesmaterial = new THREE.PointsMaterial({
       size: 0.01,
-      map: star,
+      map: _star,
       transparent: true,
     });
     const particlesCnt = 2000;

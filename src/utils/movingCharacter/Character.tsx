@@ -1,4 +1,5 @@
 import { Player } from "types";
+import img from "assets/images/breadCharacter.png";
 
 class Character {
   ctx: CanvasRenderingContext2D | null;
@@ -14,7 +15,7 @@ class Character {
   ) {
     this.ctx = ctx;
     this.character = document.createElement("img");
-    this.character.src = "/images/breadCharacter.png";
+    this.character.src = img;
     this.stageWidth = stageWidth;
     this.stageHeight = stageHeight;
     this.player = {

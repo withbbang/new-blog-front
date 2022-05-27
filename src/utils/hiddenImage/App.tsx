@@ -1,4 +1,12 @@
 import Voyeurize from "./Voyeurize";
+import jslee from "assets/images/jslee.jpg";
+import skpark from "assets/images/skpark.jpg";
+import smyoo from "assets/images/smyoo.jpg";
+import bkkim from "assets/images/bkkim.jpg";
+import hmkim from "assets/images/hmkim.jpg";
+import nykim from "assets/images/nykim.jpg";
+import jypark from "assets/images/jypark.jpg";
+import yecho from "assets/images/yecho.png";
 
 class App {
   canvas: HTMLCanvasElement;
@@ -50,21 +58,21 @@ class App {
     if (name)
       switch (name.trim()) {
         case "이종성":
-          return "/images/jslee.jpg";
+          return jslee;
         case "박상국":
-          return "/images/skpark.jpg";
+          return skpark;
         case "유소민":
-          return "/images/smyoo.jpg";
+          return smyoo;
         case "김범기":
-          return "/images/bkkim.jpg";
+          return bkkim;
         case "김현민":
-          return "/images/hmkim.jpg";
+          return hmkim;
         case "김나연":
-          return "/images/nykim.jpg";
+          return nykim;
         case "박지연":
-          return "/images/jypark.jpg";
+          return jypark;
         case "조예은":
-          return "/images/yecho.png";
+          return yecho;
         default:
           alert(
             `${

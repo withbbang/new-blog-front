@@ -1,3 +1,5 @@
+import img from "assets/images/breadCharacter.png";
+
 class Voyeurize {
   ctx: CanvasRenderingContext2D | null;
   stageWidth: number | undefined;
@@ -131,7 +133,7 @@ class Voyeurize {
 
   mousedown: () => void = () => {
     if (this.imgSrc) this.setImgSrc(this.imgSrc);
-    else this.setImgSrc("/images/breadCharacter.png");
+    else this.setImgSrc(img);
     this.fadeIn();
   };
 
@@ -149,7 +151,7 @@ class Voyeurize {
 
   touchstart: (e: any) => void = (e: any) => {
     if (this.imgSrc) this.setImgSrc(this.imgSrc);
-    else this.setImgSrc("/images/breadCharacter.png");
+    else this.setImgSrc(img);
     this.mousePosX = e.touches[0].clientX;
     this.mousePosY = e.touches[0].clientY;
     this.fadeIn();
