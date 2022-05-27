@@ -10,6 +10,7 @@ const HiddenImagePT = (props: any) => (
       backgroundSize: "contain",
       backgroundPosition: "center",
       backgroundRepeat: "no-repeat",
+      overflow: "hidden",
     }}
   ></div>
 );

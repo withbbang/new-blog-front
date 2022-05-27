@@ -3,37 +3,45 @@ import Voyeurize from "./Voyeurize";
 class App {
   canvas: HTMLCanvasElement;
   ctx: CanvasRenderingContext2D | null;
-  pixelRatio: number;
   stageWidth: number | undefined;
   stageHeight: number | undefined;
+  initImgSrc: string;
 
-  constructor(setImgSrc: React.Dispatch<React.SetStateAction<string>>) {
+  constructor(
+    initImgSrc: string,
+    setImgSrc: React.Dispatch<React.SetStateAction<string>>,
+  ) {
+    this.initImgSrc = initImgSrc;
     this.canvas = document.createElement("canvas");
     this.canvas.style.opacity = "0.999";
     const hiddenImage = document.getElementById("hiddenImage");
     hiddenImage && hiddenImage.appendChild(this.canvas);
 
     this.ctx = this.canvas.getContext("2d");
-    this.pixelRatio = window.devicePixelRatio > 1 ? 2 : 1;
 
     window.addEventListener("resize", this.resize.bind(this), false);
     this.resize();
 
     let imgSrc = this.isExist(prompt("이름을 입력하세용"));
-    imgSrc && setImgSrc(imgSrc);
 
-    new Voyeurize(this.ctx, imgSrc, this.stageWidth, this.stageWidth);
+    new Voyeurize(
+      this.ctx,
+      initImgSrc,
+      imgSrc,
+      setImgSrc,
+      this.stageWidth,
+      this.stageHeight,
+    );
   }
 
   resize(): void {
     this.stageWidth = document.body.clientWidth;
     this.stageHeight = document.body.clientHeight;
 
-    this.canvas.width = this.stageWidth * this.pixelRatio;
-    this.canvas.height = this.stageHeight * this.pixelRatio;
+    this.canvas.width = this.stageWidth;
+    this.canvas.height = this.stageHeight;
 
     if (this.ctx) {
-      this.ctx.scale(this.pixelRatio, this.pixelRatio);
       this.ctx.clearRect(0, 0, this.stageWidth, this.stageHeight);
     }
   }

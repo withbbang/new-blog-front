@@ -8,10 +8,15 @@ class Voyeurize {
   count: number;
   initCount: number;
   animation: number | null;
+  initImgSrc: string;
+  imgSrc: string;
+  setImgSrc: React.Dispatch<React.SetStateAction<string>>;
 
   constructor(
     ctx: CanvasRenderingContext2D | null,
+    initImgSrc: string,
     imgSrc: string,
+    setImgSrc: React.Dispatch<React.SetStateAction<string>>,
     stageWidth: number | undefined,
     stageHeight: number | undefined,
   ) {
@@ -24,6 +29,9 @@ class Voyeurize {
     this.count = this.random();
     this.initCount = this.count;
     this.animation = null;
+    this.initImgSrc = initImgSrc;
+    this.imgSrc = imgSrc;
+    this.setImgSrc = setImgSrc;
 
     document.addEventListener("mousemove", this.mousemove);
     document.addEventListener("mousedown", this.mousedown);
@@ -122,10 +130,13 @@ class Voyeurize {
   };
 
   mousedown: () => void = () => {
+    if (this.imgSrc) this.setImgSrc(this.imgSrc);
+    else this.setImgSrc("/images/breadCharacter.png");
     this.fadeIn();
   };
 
   mouseup: () => void = () => {
+    this.setImgSrc(this.initImgSrc);
     this.animation && cancelAnimationFrame(this.animation);
     this.count = this.initCount;
     this.fill();
@@ -136,11 +147,16 @@ class Voyeurize {
     this.mousePosY = e.clientY;
   };
 
-  touchstart: () => void = () => {
+  touchstart: (e: any) => void = (e: any) => {
+    if (this.imgSrc) this.setImgSrc(this.imgSrc);
+    else this.setImgSrc("/images/breadCharacter.png");
+    this.mousePosX = e.touches[0].clientX;
+    this.mousePosY = e.touches[0].clientY;
     this.fadeIn();
   };
 
   touchend: () => void = () => {
+    this.setImgSrc(this.initImgSrc);
     this.animation && cancelAnimationFrame(this.animation);
     this.count = this.initCount;
     this.fill();

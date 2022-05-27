@@ -6,7 +6,7 @@ const HiddenImageCT = () => {
   const [imgSrc, setImgSrc] = useState("/images/breadCharacter.png");
 
   useEffect(() => {
-    new App(setImgSrc);
+    new App(imgSrc, setImgSrc);
   }, []);
 
   return <HiddenImagePT imgSrc={imgSrc} />;
