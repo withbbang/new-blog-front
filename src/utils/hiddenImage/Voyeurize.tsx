@@ -158,6 +158,7 @@ class Voyeurize {
   };
 
   touchend: () => void = () => {
+    document.body.style.overscrollBehaviorY = "";
     this.setImgSrc(this.initImgSrc);
     this.animation && cancelAnimationFrame(this.animation);
     this.count = this.initCount;
@@ -165,6 +166,7 @@ class Voyeurize {
   };
 
   touchmove: (e: any) => void = (e: any) => {
+    document.body.style.overscrollBehaviorY = "none";
     this.mousePosX = e.changedTouches[0].clientX;
     this.mousePosY = e.changedTouches[0].clientY;
   };

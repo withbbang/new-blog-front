@@ -7,7 +7,6 @@ const HiddenImageCT = () => {
   const [imgSrc, setImgSrc] = useState(img);
 
   useEffect(() => {
-    document.body.style.overscrollBehaviorY = "none";
     new App(imgSrc, setImgSrc);
   }, []);
 
