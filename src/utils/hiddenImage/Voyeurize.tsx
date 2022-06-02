@@ -43,7 +43,7 @@ class Voyeurize {
     document.addEventListener("touchend", this.touchend);
 
     this.fill();
-    imgSrc && alert("꾸욱 누르고 있어용~");
+    imgSrc && alert("화면 꾸욱 누르고 있어용~");
 
     // 관음버전
     // this.update();
@@ -171,9 +171,8 @@ class Voyeurize {
     this.mousePosY = e.changedTouches[0].clientY;
   };
 
-  random: () => number = () => {
-    return Math.floor(Math.random() * (72000 - 54000) + 54000);
-  };
+  random: () => number = () =>
+    Math.floor(Math.random() * (72000 - 54000) + 54000);
 }
 
 export default Voyeurize;

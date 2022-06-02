@@ -43,7 +43,7 @@ class App {
     );
   }
 
-  resize(): void {
+  resize: () => void = () => {
     this.stageWidth = document.body.clientWidth;
     this.stageHeight = document.body.clientHeight;
 
@@ -53,9 +53,9 @@ class App {
     if (this.ctx) {
       this.ctx.clearRect(0, 0, this.stageWidth, this.stageHeight);
     }
-  }
+  };
 
-  isExist(name: string | null): string {
+  isExist: (name: string | null) => string = (name: string | null) => {
     if (name)
       switch (name.trim()) {
         case "송홍섭":
@@ -85,7 +85,7 @@ class App {
           return "";
       }
     else return "";
-  }
+  };
 }
 
 export default App;

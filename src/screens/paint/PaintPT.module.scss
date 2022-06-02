@@ -1,0 +1,29 @@
+.paint {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+
+  .wrap {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    display: flex;
+    z-index: 1;
+
+    .downloadBtn {
+      border: solid 1px #888888;
+      padding: 3px;
+      border-radius: 10%;
+      cursor: pointer;
+    }
+
+    .clearBtn {
+      margin-left: 5px;
+      border: solid 1px #888888;
+      padding: 3px;
+      border-radius: 10%;
+      cursor: pointer;
+    }
+  }
+}

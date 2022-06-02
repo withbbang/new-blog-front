@@ -8,6 +8,7 @@ import Rain from "screens/rain";
 import MovingCharacter from "screens/movingCharacter";
 import Starcraft from "screens/starcraft";
 import HiddenImage from "screens/hiddenImage";
+import Paint from "screens/paint";
 
 const App = () => {
   return (
@@ -22,6 +23,7 @@ const App = () => {
           <Route exact path="/movingCharacter" component={MovingCharacter} />
           <Route exact path="/starcraft" component={Starcraft} />
           <Route exact path="/hiddenImage" component={HiddenImage} />
+          <Route exact path="/paint" component={Paint} />
           <Route
             path="*"
             component={(props: any) => (

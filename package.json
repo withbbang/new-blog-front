@@ -55,7 +55,9 @@
     "@types/redux-actions": "^2.6.2",
     "@types/redux-logger": "^3.0.9",
     "@types/three": "^0.140.0",
-    "gh-pages": "^4.0.0"
+    "gh-pages": "^4.0.0",
+    "node-sass": "^7.0.1",
+    "sass-loader": "^13.0.0"
   },
   "homepage": "http://withbbang.github.io/new-blog-front/"
 }
