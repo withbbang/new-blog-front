@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./PaintPT.module.scss";
+import styles from "./styles.module.scss";
 
 const PaintPT = () => (
   <div className={styles.paint} id="paint">

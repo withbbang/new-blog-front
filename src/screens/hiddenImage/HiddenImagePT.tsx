@@ -1,16 +1,12 @@
 import React from "react";
+import styles from "./styles.module.scss";
 
 const HiddenImagePT = (props: any) => (
   <div
+    className={styles.hiddenImage}
     id="hiddenImage"
     style={{
-      width: "100%",
-      height: "100%",
       backgroundImage: `url(${props.imgSrc})`,
-      backgroundSize: "contain",
-      backgroundPosition: "center",
-      backgroundRepeat: "no-repeat",
-      overflow: "hidden",
     }}
   ></div>
 );
