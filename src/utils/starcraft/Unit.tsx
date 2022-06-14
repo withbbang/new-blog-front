@@ -2,12 +2,12 @@ class Unit {
   ctx: CanvasRenderingContext2D | null;
   unitPosX: number | undefined;
   unitPosY: number | undefined;
+  desX: number | undefined;
+  desY: number | undefined;
   isFocus: boolean;
   speed: number;
   dx: number;
   dy: number;
-  destPosX: number | undefined;
-  destPosY: number | undefined;
 
   constructor(
     ctx: CanvasRenderingContext2D | null,
@@ -18,7 +18,7 @@ class Unit {
     this.unitPosX = stageWidth && this.randomPos(stageWidth);
     this.unitPosY = stageHeight && this.randomPos(stageHeight);
     this.isFocus = false;
-    this.speed = 10;
+    this.speed = 5;
     this.dx = 0;
     this.dy = 0;
 
@@ -30,6 +30,7 @@ class Unit {
   update: () => void = () => {
     this.drawUnit();
     this.drawFocus();
+    this.move(this.desX, this.desY);
     requestAnimationFrame(this.update);
   };
 
@@ -48,13 +49,42 @@ class Unit {
 
   mouseup: (e: any) => void = (e: any) => {
     if (e.which === 3 && this.isFocus) {
-      this.destPosX = e.clientX;
-      this.destPosY = e.clientY;
+      this.desX = e.clientX;
+      this.desY = e.clientX;
+      this.setSpeed(e.clientX, e.clientY);
     }
-    this.setDestinate();
   };
 
-  setDestinate: () => void = () => {};
+  getAngle: (x: number, y: number) => number = (x: number, y: number) => {
+    let angle = 0;
+    if (this.unitPosX && this.unitPosY) {
+      // 라디안 반환
+      angle = Math.atan2(y - this.unitPosY, x - this.unitPosX);
+      // 디그리 반환시
+      // angle = angle * 180 / Math.PI
+    }
+
+    return angle;
+  };
+
+  setSpeed: (x: number, y: number) => void = (x: number, y: number) => {
+    const angle = this.getAngle(x, y);
+    this.dx = Math.cos(angle);
+    this.dy = Math.sin(angle);
+  };
+
+  move: (x: number | undefined, y: number | undefined) => void = (
+    x: number | undefined,
+    y: number | undefined,
+  ) => {
+    if (this.unitPosX && this.unitPosY && x && y) {
+      if (Math.abs(x - this.unitPosX) < 1 || Math.abs(y - this.unitPosY) < 1) {
+        return;
+      }
+      this.unitPosX += this.speed * this.dx;
+      this.unitPosY += this.speed * this.dy;
+    }
+  };
 
   setFocus: (
     dragBigX: number,
