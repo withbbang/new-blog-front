@@ -6,15 +6,18 @@ class App {
   ctx: CanvasRenderingContext2D | null;
   stageWidth: number | undefined;
   stageHeight: number | undefined;
-  startX: number | undefined;
-  startY: number | undefined;
-  endX: number | undefined;
-  endY: number | undefined;
+  units: Array<Unit>;
+  maxUnitCount: number;
+  unitCount: number;
+  atLeastOne: number;
 
   constructor() {
     this.canvas = document.createElement("canvas");
     this.ctx = this.canvas.getContext("2d");
     this.canvas.style.background = "#000000";
+    this.atLeastOne = 0;
+    this.maxUnitCount = 10; //최대 유닛 개수 이하로 랜덤하게 출력
+    this.unitCount = this.random(this.maxUnitCount);
 
     const starcraft = document.getElementById("starcraft");
     starcraft && starcraft.appendChild(this.canvas);
@@ -23,19 +26,31 @@ class App {
     this.resize();
 
     new Drag(this.ctx, this.stageWidth, this.stageHeight, this.getDragPos);
-    new Unit(this.ctx);
+    this.units = [];
+
+    for (let i = 0; i < this.unitCount; i++) {
+      this.units.push(new Unit(this.ctx, this.stageWidth, this.stageHeight));
+    }
   }
 
   getDragPos: (
-    startX: number,
-    startY: number,
-    endX: number,
-    endY: number,
-  ) => void = (startX: number, startY: number, endX: number, endY: number) => {
-    this.startX = startX;
-    this.startY = startY;
-    this.endX = endX;
-    this.endY = endY;
+    dragStartX: number,
+    dragStartY: number,
+    dragEndX: number,
+    dragEndY: number,
+  ) => void = (
+    dragStartX: number,
+    dragStartY: number,
+    dragEndX: number,
+    dragEndY: number,
+  ) => {
+    const dragBigX = dragStartX > dragEndX ? dragEndX : dragStartX;
+    const dragSmallX = dragStartY > dragEndY ? dragEndY : dragStartY;
+    const dragBigY = dragStartX > dragEndX ? dragStartX : dragEndX;
+    const dragSmallY = dragStartY > dragEndY ? dragStartY : dragEndY;
+    this.units.forEach((unit) =>
+      unit.setFocus(dragBigX, dragSmallX, dragBigY, dragSmallY),
+    );
   };
 
   resize: () => void = () => {
@@ -49,6 +64,9 @@ class App {
       this.ctx.clearRect(0, 0, this.stageWidth, this.stageHeight);
     }
   };
+
+  random: (scope: number) => number = (scope: number) =>
+    Math.floor(Math.random() * (scope - 1) + 1);
 }
 
 export default App;

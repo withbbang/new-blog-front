@@ -2,10 +2,10 @@ class Drag {
   ctx: CanvasRenderingContext2D | null;
   stageWidth: number | undefined;
   stageHeight: number | undefined;
-  startMousePosX: number | undefined | null;
-  startMousePosY: number | undefined | null;
-  endMousePosX: number | undefined | null;
-  endMousePosY: number | undefined | null;
+  dragStartX: number | undefined | null;
+  dragStartY: number | undefined | null;
+  dragEndX: number | undefined | null;
+  dragEndY: number | undefined | null;
   isDrag: boolean;
   getDragPos: (
     startX: number,
@@ -31,8 +31,6 @@ class Drag {
     this.stageHeight = stageHeight;
     this.getDragPos = getDragPos;
 
-    this.ctx!.strokeStyle = "rgb(32, 255, 32)";
-
     document.addEventListener("mousedown", this.mousedown);
     document.addEventListener("mouseup", this.mouseup);
     document.addEventListener("mousemove", this.mousemove);
@@ -44,33 +42,37 @@ class Drag {
   }
 
   mousedown: (e: any) => void = (e: any) => {
-    this.isDrag = true;
-    this.ctx?.beginPath();
-    this.startMousePosX = e.offsetX;
-    this.startMousePosY = e.offsetY;
-    this.startMousePosX &&
-      this.startMousePosY &&
-      this.ctx?.moveTo(this.startMousePosX, this.startMousePosY);
+    if (e.which === 1) {
+      this.isDrag = true;
+      this.ctx?.beginPath();
+      this.dragStartX = e.offsetX;
+      this.dragStartY = e.offsetY;
+      this.dragStartX &&
+        this.dragStartY &&
+        this.ctx?.moveTo(this.dragStartX, this.dragStartY);
+    }
   };
 
-  mouseup: () => void = () => {
-    this.isDrag = false;
-    this.setDragPos();
+  mouseup: (e: any) => void = (e: any) => {
+    if (e.which === 1) {
+      this.isDrag = false;
+      this.setDragPos();
+    }
   };
 
   mousemove: (e: any) => void = (e: any) => {
-    this.endMousePosX = e.clientX;
-    this.endMousePosY = e.clientY;
+    this.dragEndX = e.clientX;
+    this.dragEndY = e.clientY;
   };
 
   touchstart: (e: any) => void = (e: any) => {
     this.isDrag = true;
     this.ctx?.beginPath();
-    this.startMousePosX = e.touches[0].clientX;
-    this.startMousePosY = e.touches[0].clientY;
-    this.startMousePosX &&
-      this.startMousePosY &&
-      this.ctx?.moveTo(this.startMousePosX, this.startMousePosY);
+    this.dragStartX = e.touches[0].clientX;
+    this.dragStartY = e.touches[0].clientY;
+    this.dragStartX &&
+      this.dragStartY &&
+      this.ctx?.moveTo(this.dragStartX, this.dragStartY);
   };
 
   touchend: () => void = () => {
@@ -80,8 +82,8 @@ class Drag {
 
   touchmove: (e: any) => void = (e: any) => {
     document.body.style.overscrollBehaviorY = "none";
-    this.endMousePosX = e.changedTouches[0].clientX;
-    this.endMousePosY = e.changedTouches[0].clientY;
+    this.dragEndX = e.changedTouches[0].clientX;
+    this.dragEndY = e.changedTouches[0].clientY;
   };
 
   clear: () => void = () => {
@@ -92,16 +94,17 @@ class Drag {
   };
 
   drag: () => void = () => {
+    this.ctx!.strokeStyle = "rgb(32, 255, 32)";
     this.isDrag &&
-      this.startMousePosX &&
-      this.startMousePosY &&
-      this.endMousePosX &&
-      this.endMousePosY &&
+      this.dragStartX &&
+      this.dragStartY &&
+      this.dragEndX &&
+      this.dragEndY &&
       this.ctx?.strokeRect(
-        this.startMousePosX,
-        this.startMousePosY,
-        this.endMousePosX - this.startMousePosX,
-        this.endMousePosY - this.startMousePosY,
+        this.dragStartX,
+        this.dragStartY,
+        this.dragEndX - this.dragStartX,
+        this.dragEndY - this.dragStartY,
       );
   };
 
@@ -113,15 +116,15 @@ class Drag {
 
   setDragPos: () => void = () => {
     this.isDrag = false;
-    this.startMousePosX &&
-      this.startMousePosY &&
-      this.endMousePosX &&
-      this.endMousePosY &&
+    this.dragStartX &&
+      this.dragStartY &&
+      this.dragEndX &&
+      this.dragEndY &&
       this.getDragPos(
-        this.startMousePosX,
-        this.startMousePosY,
-        this.endMousePosX,
-        this.endMousePosY,
+        this.dragStartX,
+        this.dragStartY,
+        this.dragEndX,
+        this.dragEndY,
       );
   };
 }
