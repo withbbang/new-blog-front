@@ -8,7 +8,7 @@ class Drag {
   dragStartY: number | undefined | null;
   // 드래그 종료 X좌표
   dragEndX: number | undefined | null;
-  // 드래그 시작 Y좌표
+  // 드래그 종료 Y좌표
   dragEndY: number | undefined | null;
   // 드래그 중인지 여부 변수
   isDrag: boolean;
