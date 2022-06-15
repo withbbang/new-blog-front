@@ -1,12 +1,20 @@
 class Unit {
   ctx: CanvasRenderingContext2D | null;
+  // 생성된 유닛 X좌표
   unitPosX: number | undefined;
+  // 생성된 유닛 Y좌표
   unitPosY: number | undefined;
+  // 유닛의 목적 X좌표
   desX: number | undefined;
+  // 유닛의 목적 Y좌표
   desY: number | undefined;
+  // 드래그돼서 포커싱된 유무값
   isFocus: boolean;
+  // 유닛의 절대 움직임 속도
   speed: number;
+  // X축 방향으로의 속도
   dx: number;
+  // Y축 방향으로의 속도
   dy: number;
 
   constructor(
@@ -34,6 +42,7 @@ class Unit {
     requestAnimationFrame(this.update);
   };
 
+  // 유닛 그리기
   drawUnit: () => void = () => {
     this.ctx?.beginPath();
     if (this.unitPosX && this.unitPosY) {
@@ -47,6 +56,7 @@ class Unit {
     this.ctx?.stroke();
   };
 
+  // 우클릭 했을 시 목적좌표 및 X, Y축 각각의 속도 설정
   mouseup: (e: any) => void = (e: any) => {
     if (e.which === 3 && this.isFocus) {
       this.desX = e.clientX;
@@ -55,12 +65,14 @@ class Unit {
     }
   };
 
+  // 유닛의 X, Y축 각각의 속도 설정
   setSpeed: (x: number, y: number) => void = (x: number, y: number) => {
     const angle = this.getAngle(x, y);
     this.dx = this.speed * Math.cos(angle);
     this.dy = this.speed * Math.sin(angle);
   };
 
+  // 각도 반환 함수
   getAngle: (x: number, y: number) => number = (x: number, y: number) => {
     let angle = 0;
     if (this.unitPosX && this.unitPosY) {
@@ -73,12 +85,14 @@ class Unit {
     return angle;
   };
 
+  // 유닛의 움직임을 일으키는 함수
   move: (x: number | undefined, y: number | undefined) => void = (
     x: number | undefined,
     y: number | undefined,
   ) => {
     if (this.unitPosX && this.unitPosY && x && y) {
       if (
+        // 유닛이 목적좌표에 가까워 졌을 경우 움직임 멈춤
         Math.sqrt(
           Math.pow(x - this.unitPosX, 2) + Math.pow(y - this.unitPosY, 2),
         ) <= this.speed
@@ -91,6 +105,7 @@ class Unit {
     }
   };
 
+  // 유닛이 드래그 내부에 들어왔을 경우 포커싱 설정 함수
   setFocus: (
     dragBigX: number,
     dragBigY: number,
@@ -116,6 +131,7 @@ class Unit {
     }
   };
 
+  // 유닛이 포커싱 됐을 경우, 유닛 하단에 포커싱 그림 그리기
   drawFocus: () => void = () => {
     if (this.isFocus) {
       this.ctx?.beginPath();
@@ -138,6 +154,7 @@ class Unit {
     }
   };
 
+  // 유닛 생성 위치좌표 랜덤하게 가져오기
   randomPos: (scope: number) => number = (scope: number) =>
     Math.floor(Math.random() * (scope - 10) + 10);
 }
