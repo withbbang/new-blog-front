@@ -50,9 +50,15 @@ class Unit {
   mouseup: (e: any) => void = (e: any) => {
     if (e.which === 3 && this.isFocus) {
       this.desX = e.clientX;
-      this.desY = e.clientX;
+      this.desY = e.clientY;
       this.setSpeed(e.clientX, e.clientY);
     }
+  };
+
+  setSpeed: (x: number, y: number) => void = (x: number, y: number) => {
+    const angle = this.getAngle(x, y);
+    this.dx = this.speed * Math.cos(angle);
+    this.dy = this.speed * Math.sin(angle);
   };
 
   getAngle: (x: number, y: number) => number = (x: number, y: number) => {
@@ -67,22 +73,21 @@ class Unit {
     return angle;
   };
 
-  setSpeed: (x: number, y: number) => void = (x: number, y: number) => {
-    const angle = this.getAngle(x, y);
-    this.dx = Math.cos(angle);
-    this.dy = Math.sin(angle);
-  };
-
   move: (x: number | undefined, y: number | undefined) => void = (
     x: number | undefined,
     y: number | undefined,
   ) => {
     if (this.unitPosX && this.unitPosY && x && y) {
-      if (Math.abs(x - this.unitPosX) < 1 || Math.abs(y - this.unitPosY) < 1) {
-        return;
+      if (
+        Math.sqrt(
+          Math.pow(x - this.unitPosX, 2) + Math.pow(y - this.unitPosY, 2),
+        ) <= this.speed
+      ) {
+        this.dx = 0;
+        this.dy = 0;
       }
-      this.unitPosX += this.speed * this.dx;
-      this.unitPosY += this.speed * this.dy;
+      this.unitPosX += this.dx;
+      this.unitPosY += this.dy;
     }
   };
 
