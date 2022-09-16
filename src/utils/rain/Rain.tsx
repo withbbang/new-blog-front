@@ -31,8 +31,8 @@ class Rain {
   }
 
   update: () => void = () => {
-    this.createRain();
     this.clear();
+    this.createRain();
     this.drop();
     requestAnimationFrame(this.update);
   };
@@ -57,12 +57,9 @@ class Rain {
 
   clear: () => void = () => {
     this.posX &&
-      this.ctx?.clearRect(
-        this.posX,
-        this.posY,
-        this.posX + this.rainWidth,
-        this.posY + this.rainHeight,
-      );
+      this.stageWidth &&
+      this.stageHeight &&
+      this.ctx?.clearRect(0, 0, this.stageWidth, this.stageHeight);
   };
 
   drop: () => void = () => {
