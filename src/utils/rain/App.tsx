@@ -19,10 +19,10 @@ class App {
     window.addEventListener("resize", this.resize.bind(this), false);
     this.resize();
 
-    new Rain(this.ctx, this.stageWidth);
+    new Rain(this.ctx, this.stageWidth, this.stageHeight);
   }
 
-  resize() {
+  resize: () => void = () => {
     this.stageWidth = document.body.clientWidth;
     this.stageHeight = document.body.clientHeight;
 
@@ -33,7 +33,7 @@ class App {
       this.ctx.scale(this.pixelRatio, this.pixelRatio);
       this.ctx.clearRect(0, 0, this.stageWidth, this.stageHeight);
     }
-  }
+  };
 }
 
 export default App;
