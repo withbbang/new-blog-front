@@ -11,7 +11,7 @@ class App {
   constructor() {
     this.canvas = document.createElement("canvas");
     this.canvas.style.background = "#000000";
-    this.count = 500;
+    this.count = 1000;
     const rainTag = document.getElementById("rain");
     rainTag && rainTag.appendChild(this.canvas);
 
