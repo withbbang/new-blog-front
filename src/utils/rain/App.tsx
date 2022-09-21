@@ -6,10 +6,12 @@ class App {
   pixelRatio: number;
   stageWidth: number | undefined;
   stageHeight: number | undefined;
+  count: number;
 
   constructor() {
     this.canvas = document.createElement("canvas");
     this.canvas.style.background = "#000000";
+    this.count = 500;
     const rainTag = document.getElementById("rain");
     rainTag && rainTag.appendChild(this.canvas);
 
@@ -18,9 +20,27 @@ class App {
 
     window.addEventListener("resize", this.resize.bind(this), false);
     this.resize();
+    this.update();
 
-    new Rain(this.ctx, this.stageWidth, this.stageHeight);
+    this.startRain();
   }
+
+  startRain: () => void = async () => {
+    // for문에 timeout 시간만큼 delay걸기
+    for (let i = 0; i < this.count; i++) {
+      await new Promise<void>((resolve, reject) =>
+        setTimeout(() => {
+          new Rain(this.ctx, this.stageWidth, this.stageHeight);
+          resolve();
+        }, 250),
+      );
+    }
+  };
+
+  update: () => void = () => {
+    this.clear();
+    requestAnimationFrame(this.update);
+  };
 
   resize: () => void = () => {
     this.stageWidth = document.body.clientWidth;
@@ -33,6 +53,16 @@ class App {
       this.ctx.scale(this.pixelRatio, this.pixelRatio);
       this.ctx.clearRect(0, 0, this.stageWidth, this.stageHeight);
     }
+  };
+
+  clear: () => void = () => {
+    this.stageWidth &&
+      this.stageHeight &&
+      this.ctx?.clearRect(0, 0, this.stageWidth, this.stageHeight);
+  };
+
+  random: (min: number, max: number) => number = (min: number, max: number) => {
+    return min + Math.floor(Math.random() * (max - min + 1));
   };
 }
 

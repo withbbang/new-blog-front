@@ -19,11 +19,11 @@ class Rain {
     this.ctx = ctx;
     this.posX = stageWidth && this.random(0, stageWidth);
     this.posY = 0;
-    this.speed = 10;
+    this.speed = this.random(15, 20);
     this.color = "#87ceeb";
     this.particles = [];
     this.rainWidth = this.random(1, 5);
-    this.rainHeight = this.random(this.speed, this.speed + 20);
+    this.rainHeight = this.random(this.speed + 10, this.speed + 20);
     this.stageWidth = stageWidth;
     this.stageHeight = stageHeight;
 
@@ -31,7 +31,6 @@ class Rain {
   }
 
   update: () => void = () => {
-    this.clear();
     this.createRain();
     this.drop();
     requestAnimationFrame(this.update);
@@ -64,6 +63,7 @@ class Rain {
 
   drop: () => void = () => {
     if (this.stageHeight && this.stageHeight < this.posY) {
+      this.posY = 0;
       return;
     }
 
