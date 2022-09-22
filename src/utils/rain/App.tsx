@@ -28,7 +28,7 @@ class App {
   startRain: () => void = async () => {
     // for문에 timeout 시간만큼 delay걸기
     for (let i = 0; i < this.count; i++) {
-      await new Promise<void>((resolve, reject) =>
+      await new Promise<void>((resolve) =>
         setTimeout(() => {
           new Rain(this.ctx, this.stageWidth, this.stageHeight);
           resolve();

@@ -22,8 +22,8 @@ class Rain {
     this.speed = this.random(15, 20);
     this.color = "#87ceeb";
     this.particles = [];
-    this.rainWidth = this.random(1, 5);
-    this.rainHeight = this.random(this.speed + 10, this.speed + 20);
+    this.rainWidth = this.random(2, 4);
+    this.rainHeight = this.random(5, 10);
     this.stageWidth = stageWidth;
     this.stageHeight = stageHeight;
 
@@ -52,13 +52,6 @@ class Rain {
       this.ctx.stroke();
       this.ctx.closePath();
     }
-  };
-
-  clear: () => void = () => {
-    this.posX &&
-      this.stageWidth &&
-      this.stageHeight &&
-      this.ctx?.clearRect(0, 0, this.stageWidth, this.stageHeight);
   };
 
   drop: () => void = () => {
