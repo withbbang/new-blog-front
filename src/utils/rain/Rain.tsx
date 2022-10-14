@@ -1,5 +1,6 @@
+import Particles from "./Particles";
+
 class Rain {
-  particles: never[];
   stageWidth: number | undefined;
   stageHeight: number | undefined;
   posX: number | undefined;
@@ -10,6 +11,7 @@ class Rain {
   rainWidth: number;
   rainHeight: number;
   animation: number | undefined;
+  particles: Array<Particles>;
 
   constructor(
     ctx: CanvasRenderingContext2D | null,
@@ -26,8 +28,10 @@ class Rain {
     this.rainHeight = this.random(5, 10);
     this.stageWidth = stageWidth;
     this.stageHeight = stageHeight;
+    this.particles = [];
 
     this.update();
+    this.createParticles();
   }
 
   update: () => void = () => {
@@ -57,13 +61,28 @@ class Rain {
   drop: () => void = () => {
     if (this.stageHeight && this.stageHeight < this.posY) {
       this.posY = 0;
-      return;
+    } else {
+      this.posY += this.speed;
     }
-
-    this.posY += this.speed;
   };
 
-  createParticles: () => void = () => {};
+  createParticles: () => void = () => {
+    const direction = ["topLeft", "topRight", "bottomLeft", "bottomRight"];
+    direction.forEach((drt) => {
+      this.particles.push(
+        new Particles(
+          this.ctx,
+          this.stageWidth,
+          this.stageHeight,
+          this.posX,
+          this.color,
+          this.speed,
+          this.rainWidth,
+          drt,
+        ),
+      );
+    });
+  };
 
   random: (min: number, max: number) => number = (min: number, max: number) => {
     return min + Math.floor(Math.random() * (max - min + 1));
