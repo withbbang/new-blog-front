@@ -8,4 +8,9 @@ const MdToHtmlCT = () => {
   return <MdToHtmlPT text={text} setText={setText} />;
 };
 
+export type MdToHtmlType = {
+  text: string;
+  setText: (text: string) => void;
+};
+
 export default MdToHtmlCT;

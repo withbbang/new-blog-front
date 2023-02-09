@@ -2,10 +2,12 @@ import React from 'react';
 import ReactMarkDown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import styles from './styles.module.scss';
+import { MdToHtmlType } from './MdToHtmlCT';
 
-const MdToHtmlPT = (props: any) => {
-  const text = 'Just a link: https://reactjs.com.';
-
+const MdToHtmlPT = (
+  props: MdToHtmlType
+  /* 대체 방법 { text, setText }: MdToHtmlType */
+) => {
   return (
     <>
       <textarea
