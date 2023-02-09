@@ -61,5 +61,6 @@
     "node-sass": "^7.0.1",
     "sass-loader": "^13.0.0"
   },
-  "homepage": "http://withbbang.github.io/new-blog-front/"
+  "homepage": "http://withbbang.github.io/new-blog-front/",
+  "render-hompage": "https://bread-blog.onrender.com/"
 }

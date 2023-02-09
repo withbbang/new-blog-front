@@ -14,10 +14,7 @@ const MdToHtmlPT = (
         value={props.text}
         onChange={(e) => props.setText(e.target.value)}
       ></textarea>
-      <ReactMarkDown
-        children={props.text}
-        remarkPlugins={[remarkGfm]}
-      ></ReactMarkDown>
+      <ReactMarkDown children={props.text} remarkPlugins={[remarkGfm]} />
     </>
   );
 };
