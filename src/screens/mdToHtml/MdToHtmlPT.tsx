@@ -29,8 +29,10 @@ const MdToHtmlPT = (
   return (
     <>
       <textarea
+        id="textarea"
         value={props.text}
         onChange={(e) => props.setText(e.target.value)}
+        onKeyDown={(e) => props.onTextAreaTab(e)}
       ></textarea>
       <ReactMarkdown
         children={props.text}
