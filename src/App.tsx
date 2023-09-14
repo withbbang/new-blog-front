@@ -11,12 +11,13 @@ import HiddenImage from 'screens/hiddenImage';
 import Paint from 'screens/paint';
 import MdToHtml from 'screens/mdToHtml';
 import Wysiwyg from 'screens/wysiwyg';
+import Sentry from 'screens/sentry';
 
 const App = () => {
   return (
     <>
       {/* <Background /> */}
-      <BrowserRouter basename={process.env.PUBLIC_URL}>
+      <BrowserRouter>
         <Switch>
           <Route exact path="/" component={Index} />
           <Route exact path="/three" component={Three} />
@@ -28,6 +29,7 @@ const App = () => {
           <Route exact path="/paint" component={Paint} />
           <Route exact path="/mdToHtml" component={MdToHtml} />
           <Route exact path="/wysiwyg" component={Wysiwyg} />
+          <Route exact path="/sentry" component={Sentry} />
           <Route
             path="*"
             component={(props: any) => (
