@@ -10,6 +10,7 @@ import Starcraft from 'screens/starcraft';
 import HiddenImage from 'screens/hiddenImage';
 import Paint from 'screens/paint';
 import MdToHtml from 'screens/mdToHtml';
+import Wysiwyg from 'screens/wysiwyg';
 
 const App = () => {
   return (
@@ -26,6 +27,7 @@ const App = () => {
           <Route exact path="/hiddenImage" component={HiddenImage} />
           <Route exact path="/paint" component={Paint} />
           <Route exact path="/mdToHtml" component={MdToHtml} />
+          <Route exact path="/wysiwyg" component={Wysiwyg} />
           <Route
             path="*"
             component={(props: any) => (
